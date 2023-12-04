@@ -75,7 +75,7 @@ fn extract_number(input: &str) -> (u32, usize) {
 }
 
 pub fn soln_3_1() -> u32 {
-    let input = std::fs::read_to_string("input/3.1.txt").unwrap();
+    let input = std::fs::read_to_string("input/3.txt").unwrap();
     let map = Map::from(&input);
 
     map.numbers
@@ -95,7 +95,7 @@ pub fn soln_3_1() -> u32 {
 }
 
 pub fn soln_3_2() -> u32 {
-    let input = std::fs::read_to_string("input/3.1.txt").unwrap();
+    let input = std::fs::read_to_string("input/3.txt").unwrap();
     let map = Map::from(&input);
 
     let mut symbols: HashMap<Coord, Vec<_>> =

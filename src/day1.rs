@@ -11,7 +11,7 @@ fn first_last(digits: &[u32]) -> u32 {
 }
 
 pub fn soln_1_1() -> u32 {
-    read_to_string("input/1.1.txt")
+    read_to_string("input/1.txt")
         .unwrap()
         .lines()
         .map(|s| {
@@ -50,7 +50,7 @@ fn get_digits(s: &str) -> Vec<u32> {
 }
 
 pub fn soln_1_2() -> u32 {
-    read_to_string("input/1.2.txt")
+    read_to_string("input/1.txt")
         .unwrap()
         .lines()
         .map(|s| {

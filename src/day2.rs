@@ -12,7 +12,7 @@ fn parse_game(game_str: &str) -> impl Iterator<Item = (u32, &str)> {
 }
 
 pub fn soln_2_1() -> usize {
-    std::fs::read_to_string("input/2.1.txt")
+    std::fs::read_to_string("input/2.txt")
         .unwrap()
         .lines()
         .map(parse_game)
@@ -32,7 +32,7 @@ pub fn soln_2_1() -> usize {
 }
 
 pub fn soln_2_2() -> u32 {
-    std::fs::read_to_string("input/2.2.txt")
+    std::fs::read_to_string("input/2.txt")
         .unwrap()
         .lines()
         .map(parse_game)
