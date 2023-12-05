@@ -4,17 +4,15 @@ mod day3;
 mod day4;
 mod day5;
 
-fn main() {
-    println!("1.1: {}", day1::soln_1_1());
-    println!("1.2: {}", day1::soln_1_2());
-    println!("2.1: {}", day2::soln_2_1());
-    println!("2.2: {}", day2::soln_2_2());
-    println!("3.1: {}", day3::soln_3_1());
-    println!("3.2: {}", day3::soln_3_2());
-    println!("4.1: {}", day4::soln_4_1());
-    println!("4.2: {}", day4::soln_4_2());
+fn print_soln<T: std::fmt::Display, S: std::fmt::Display>(day: &str, solns: (T, S)) {
+    println!("{day}.1: {}", solns.0);
+    println!("{day}.2: {}", solns.1);
+}
 
-    let (day5_1, day5_2) = day5::soln();
-    println!("5.1: {day5_1}");
-    println!("5.2: {day5_2}");
+fn main() {
+    print_soln("1", (day1::soln_1_1(), day1::soln_1_2()));
+    print_soln("2", (day2::soln_2_1(), day2::soln_2_2()));
+    print_soln("3", (day3::soln_3_1(), day3::soln_3_2()));
+    print_soln("4", (day4::soln_4_1(), day4::soln_4_2()));
+    print_soln("5", day5::soln());
 }

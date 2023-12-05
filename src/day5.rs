@@ -2,7 +2,6 @@ use itertools::Itertools;
 
 type Range = (u64, u64);
 
-#[derive(Clone, Debug)]
 struct Mapping {
     src: Range,
     dst: Range,
