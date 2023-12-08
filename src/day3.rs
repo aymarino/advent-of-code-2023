@@ -44,7 +44,7 @@ impl Map {
                 let c = s.as_bytes()[j] as char;
                 match c {
                     '.' => {}
-                    _ if c.is_digit(10) => {
+                    _ if c.is_ascii_digit() => {
                         let (n, len) = extract_number(&s[j..]);
                         numbers.push(Number {
                             n,
@@ -68,9 +68,8 @@ impl Map {
 fn extract_number(input: &str) -> (u32, usize) {
     let number_end = input
         .chars()
-        .position(|c| !c.is_digit(10))
-        .or(Some(input.len()))
-        .unwrap();
+        .position(|c| !c.is_ascii_digit())
+        .unwrap_or(input.len());
     (input[..number_end].parse().unwrap(), number_end)
 }
 
@@ -100,7 +99,7 @@ pub fn soln_3_2() -> u32 {
 
     let mut symbols: HashMap<Coord, Vec<_>> =
         HashMap::from_iter(map.symbols.iter().filter_map(|(idx, c)| match c {
-            '*' => Some((idx.clone(), Vec::new())),
+            '*' => Some((*idx, Vec::new())),
             _ => None,
         }));
     map.numbers.iter().for_each(|n| {

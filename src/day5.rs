@@ -76,8 +76,7 @@ pub fn soln() -> (u64, u64) {
                 let mut mapped_ranges = Vec::new();
                 for m in c {
                     let mut unmapped_ranges = Vec::new();
-                    while !ranges.is_empty() {
-                        let r = ranges.pop().unwrap();
+                    while let Some(r) = ranges.pop() {
                         let before = (r.0, r.1.min(m.src.0)); // the part of `r` before `m.src`
                         let between = (r.0.max(m.src.0), r.1.min(m.src.1)); // the part of `r` within `m.src`
                         let after = (r.0.max(m.src.1), r.1); // the part of `r` after `m.src`

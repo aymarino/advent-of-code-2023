@@ -72,7 +72,7 @@ enum Card {
 
 impl Card {
     fn from(c: char) -> Self {
-        if c.is_digit(10) {
+        if c.is_ascii_digit() {
             return Card::N(c.to_digit(10).unwrap() as u8);
         }
         match c {
@@ -85,7 +85,7 @@ impl Card {
         }
     }
 
-    fn to_p2(self) -> Self {
+    fn into_p2(self) -> Self {
         match self {
             Card::J => Card::Joker,
             _ => self,
@@ -100,7 +100,7 @@ struct Hand {
     bid: u64,
 }
 
-fn solve_hands(hands: &mut Vec<Hand>) -> u64 {
+fn solve_hands(hands: &mut [Hand]) -> u64 {
     hands.sort();
     hands
         .iter()
@@ -130,7 +130,7 @@ pub fn soln() -> (u64, u64) {
     let mut hands: Vec<_> = hands
         .into_iter()
         .map(|h| {
-            let hand_p2: Vec<_> = h.hand.into_iter().map(Card::to_p2).collect();
+            let hand_p2: Vec<_> = h.hand.into_iter().map(Card::into_p2).collect();
             Hand {
                 kind: HandKind::from(&hand_p2),
                 hand: hand_p2,
