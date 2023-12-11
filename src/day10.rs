@@ -104,13 +104,10 @@ pub fn soln() -> (u32, u32) {
                 continue;
             }
             let coord = move_coordinate(&starting_pos, &d);
-            match &map[coord.0][coord.1] {
-                Block::Pipe(p) => {
-                    if let Some(_) = p.map_direction(d) {
-                        return d;
-                    }
+            if let Block::Pipe(p) = &map[coord.0][coord.1] {
+                if p.map_direction(d).is_some() {
+                    return d;
                 }
-                _ => {}
             }
         }
         panic!("Could not find starting dir");
@@ -133,7 +130,7 @@ pub fn soln() -> (u32, u32) {
         p1 += 1;
     }
 
-    p1 = p1 / 2;
+    p1 /= 2;
 
     let p2 = map
         .iter()

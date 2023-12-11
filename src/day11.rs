@@ -46,13 +46,12 @@ pub fn soln() -> (u64, u64) {
     let stars = input
         .lines()
         .enumerate()
-        .map(|(i, line)| {
+        .flat_map(|(i, line)| {
             line.chars().enumerate().filter_map(move |(j, c)| match c {
                 '#' => Some((i, j)),
                 _ => None,
             })
         })
-        .flatten()
         .collect::<HashSet<_>>();
     let rows_with_star = stars.iter().map(|(i, _)| *i).collect::<HashSet<_>>();
     let cols_with_star = stars.iter().map(|(_, j)| *j).collect::<HashSet<_>>();

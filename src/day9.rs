@@ -42,6 +42,7 @@ pub fn soln() -> (i64, i64) {
     // We make the assumption that for the y_j points given in the inputs, x_i == i for i in 0..n.
     let coefficients = {
         // n == number of points in each line.
+        // u128 is necessary for n, j since factorial will otherwise overflow u64.
         let n = input.split_once('\n').unwrap().0.split(' ').count() as u128;
         // P_j (x) = y_j * coefficient, where
         // coefficient = prod((x - x_k) / (x_j - x_k), for k in 0..n where k != j)
@@ -49,8 +50,6 @@ pub fn soln() -> (i64, i64) {
         // Calculate a vector of coefficients for [P_0, .., P_(n-1)]
         (0..n)
             .map(|j| {
-                // u128 is necessary for n, j since factorial will otherwise overflow u64.
-                let j = j as u128;
                 // This is a non-standard derivation of Lagrange. It is specialized for consecutive
                 // integral x points.
                 let n_choose_j = n.factorial() / ((n - j).factorial() * j.factorial());
