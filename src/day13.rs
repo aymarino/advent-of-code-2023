@@ -1,7 +1,54 @@
 use std::collections::HashSet;
 
-fn solve(input: &str, num_mistakes: usize) -> u32 {
-    input
+struct Case {
+    rocks: HashSet<(i32, i32)>,
+    n_rows: i32,
+    n_cols: i32,
+}
+
+fn mirror_location(case: &Case, num_mistakes: usize) -> i32 {
+    if let Some(row) = (0..case.n_rows - 1).find(|row| {
+        case.rocks
+            .iter()
+            .filter(|r| {
+                let rock_row = r.0;
+                let reflected_row = if rock_row > *row {
+                    row - (rock_row - row) + 1
+                } else {
+                    row + (row - rock_row) + 1
+                };
+                let out_of_bounds = reflected_row < 0 || reflected_row >= case.n_rows;
+                !out_of_bounds && !case.rocks.contains(&(reflected_row, r.1))
+            })
+            .count()
+            == num_mistakes
+    }) {
+        (row + 1) * 100
+    } else if let Some(col) = (0..case.n_cols - 1).find(|col| {
+        case.rocks
+            .iter()
+            .filter(|r| {
+                let rock_col = r.1;
+                let reflected_col = if rock_col > *col {
+                    col - (rock_col - col) + 1
+                } else {
+                    col + (col - rock_col) + 1
+                };
+                let out_of_bounds = reflected_col < 0 || reflected_col >= case.n_cols;
+                !out_of_bounds && !case.rocks.contains(&(r.0, reflected_col))
+            })
+            .count()
+            == num_mistakes
+    }) {
+        col + 1
+    } else {
+        panic!("Did not find reflective col or row")
+    }
+}
+
+pub fn soln() -> (u32, u32) {
+    let input = include_str!("../input/13.txt");
+    let cases = input
         .split("\n\n")
         .map(|case| {
             let n_rows = case.lines().count() as i32;
@@ -16,51 +63,20 @@ fn solve(input: &str, num_mistakes: usize) -> u32 {
                     })
                 })
                 .collect::<HashSet<_>>();
-
-            if let Some(row) = (0..n_rows - 1).find(|row| {
-                rocks
-                    .iter()
-                    .filter(|r| {
-                        let rock_row = r.0;
-                        let reflected_row = if rock_row > *row {
-                            row - (rock_row - row) + 1
-                        } else {
-                            row + (row - rock_row) + 1
-                        };
-                        let out_of_bounds = reflected_row < 0 || reflected_row >= n_rows;
-                        !out_of_bounds && !rocks.contains(&(reflected_row, r.1))
-                    })
-                    .count()
-                    == num_mistakes
-            }) {
-                (row + 1) * 100
-            } else if let Some(col) = (0..n_cols - 1).find(|col| {
-                rocks
-                    .iter()
-                    .filter(|r| {
-                        let rock_col = r.1;
-                        let reflected_col = if rock_col > *col {
-                            col - (rock_col - col) + 1
-                        } else {
-                            col + (col - rock_col) + 1
-                        };
-                        let out_of_bounds = reflected_col < 0 || reflected_col >= n_cols;
-                        !out_of_bounds && !rocks.contains(&(r.0, reflected_col))
-                    })
-                    .count()
-                    == num_mistakes
-            }) {
-                col + 1
-            } else {
-                panic!("Did not find reflective col or row")
+            Case {
+                rocks,
+                n_rows,
+                n_cols,
             }
         })
-        .sum::<i32>() as u32
-}
-
-pub fn soln() -> (u32, u32) {
-    let input = include_str!("../input/13.txt");
-    let p1 = solve(input, 0);
-    let p2 = solve(input, 1);
+        .collect::<Vec<_>>();
+    let p1 = cases
+        .iter()
+        .map(|case| mirror_location(case, 0))
+        .sum::<i32>() as u32;
+    let p2 = cases
+        .iter()
+        .map(|case| mirror_location(case, 1))
+        .sum::<i32>() as u32;
     (p1, p2)
 }
