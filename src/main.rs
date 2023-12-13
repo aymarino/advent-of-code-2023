@@ -1,6 +1,7 @@
 mod day1;
 mod day10;
 mod day11;
+mod day12;
 mod day2;
 mod day3;
 mod day4;
@@ -27,4 +28,5 @@ fn main() {
     print_soln("9", day9::soln());
     print_soln("10", day10::soln());
     print_soln("11", day11::soln());
+    print_soln("12", day12::soln());
 }
