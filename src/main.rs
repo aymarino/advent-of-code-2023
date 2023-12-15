@@ -1,17 +1,17 @@
-mod day1;
+mod day01;
+mod day02;
+mod day03;
+mod day04;
+mod day05;
+mod day06;
+mod day07;
+mod day08;
+mod day09;
 mod day10;
 mod day11;
 mod day12;
 mod day13;
 mod day14;
-mod day2;
-mod day3;
-mod day4;
-mod day5;
-mod day6;
-mod day7;
-mod day8;
-mod day9;
 
 fn print_soln<T: std::fmt::Display, S: std::fmt::Display>(day: &str, solns: (T, S)) {
     println!("{day}.1: {}", solns.0);
@@ -19,15 +19,15 @@ fn print_soln<T: std::fmt::Display, S: std::fmt::Display>(day: &str, solns: (T, 
 }
 
 fn main() {
-    print_soln("1", (day1::soln_1_1(), day1::soln_1_2()));
-    print_soln("2", (day2::soln_2_1(), day2::soln_2_2()));
-    print_soln("3", (day3::soln_3_1(), day3::soln_3_2()));
-    print_soln("4", (day4::soln_4_1(), day4::soln_4_2()));
-    print_soln("5", day5::soln());
-    print_soln("6", day6::soln());
-    print_soln("7", day7::soln());
-    print_soln("8", day8::soln());
-    print_soln("9", day9::soln());
+    print_soln("01", (day01::soln_1_1(), day01::soln_1_2()));
+    print_soln("02", (day02::soln_2_1(), day02::soln_2_2()));
+    print_soln("03", (day03::soln_3_1(), day03::soln_3_2()));
+    print_soln("04", (day04::soln_4_1(), day04::soln_4_2()));
+    print_soln("05", day05::soln());
+    print_soln("06", day06::soln());
+    print_soln("07", day07::soln());
+    print_soln("08", day08::soln());
+    print_soln("09", day09::soln());
     print_soln("10", day10::soln());
     print_soln("11", day11::soln());
     print_soln("12", day12::soln());
