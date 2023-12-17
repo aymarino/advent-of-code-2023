@@ -13,6 +13,7 @@ mod day12;
 mod day13;
 mod day14;
 mod day15;
+mod day16;
 
 fn print_soln<T: std::fmt::Display, S: std::fmt::Display>(day: &str, solns: (T, S)) {
     println!("{day}.1: {}", solns.0);
@@ -35,4 +36,5 @@ fn main() {
     print_soln("13", day13::soln());
     print_soln("14", day14::soln());
     print_soln("15", day15::soln());
+    print_soln("16", day16::soln());
 }
